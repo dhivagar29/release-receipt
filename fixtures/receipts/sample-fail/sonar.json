@@ -1,0 +1,12 @@
+{
+  "projectKey": "acme-payments-api",
+  "qualityGate": {
+    "status": "ERROR",
+    "conditions": [
+      { "metric": "reliability_rating", "status": "ERROR", "actual": "E" },
+      { "metric": "security_rating", "status": "OK" },
+      { "metric": "coverage", "status": "ERROR", "value": "41.2" }
+    ]
+  },
+  "evidence_uri": "https://sonar.example.com/dashboard?id=acme-payments-api"
+}

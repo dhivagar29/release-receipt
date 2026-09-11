@@ -1,0 +1,12 @@
+{
+  "tool": "snyk",
+  "label": "SCA vendor",
+  "project": "acme/payments-api",
+  "commit": "f00dbadecafe0000111122223333444455556666",
+  "fail_on_high": true,
+  "critical": 2,
+  "high": 4,
+  "medium": 6,
+  "low": 3,
+  "evidence_uri": "https://app.snyk.io/org/acme/project/demo-payments-api"
+}

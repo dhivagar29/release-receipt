@@ -1,0 +1,8 @@
+{
+  "commit": "f00dbadecafe0000111122223333444455556666",
+  "critical": 1,
+  "high": 3,
+  "medium": 5,
+  "low": 2,
+  "evidence_uri": "https://github.com/acme/payments-api/security/dependabot"
+}

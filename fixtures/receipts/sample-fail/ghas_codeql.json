@@ -1,0 +1,14 @@
+{
+  "tool": "codeql",
+  "commit": "f00dbadecafe0000111122223333444455556666",
+  "rule_count_by_severity": {
+    "critical": 1,
+    "high": 2,
+    "medium": 4,
+    "low": 1,
+    "note": 0
+  },
+  "blocking": "critical",
+  "status": "fail",
+  "evidence_uri": "https://github.com/acme/payments-api/security/code-scanning?query=ref:refs/heads/main"
+}
