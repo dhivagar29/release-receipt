@@ -59,4 +59,4 @@ export interface FixtureMeta {
   artifact: ArtifactInfo;
 }
 
-export type Scenario = "pass" | "fail";
+export type Scenario = "pass" | "fail" | "warn";

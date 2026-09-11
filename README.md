@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) → **Demo PASS** / **Demo FAIL**, or **Generate from fixtures**.
+Open [http://localhost:3000](http://localhost:3000) → **Demo PASS** / **Demo WARN** / **Demo FAIL**, or **Generate from fixtures**.
 
 ```bash
 npm run build
@@ -43,10 +43,10 @@ npm run build
 | Method | Path | Description |
 | --- | --- | --- |
 | GET | `/` | Landing |
-| GET | `/demo` | PASS demo (`?scenario=fail` for FAIL) |
+| GET | `/demo` | PASS demo (`?scenario=warn` / `fail`) |
 | GET | `/r/:id` | Receipt HTML |
 | GET | `/r/:id.json` | Receipt JSON export |
-| POST | `/api/receipts/from-fixtures` | Body `{ "scenario": "pass" | "fail" }` |
+| POST | `/api/receipts/from-fixtures` | Body `{ "scenario": "pass" \| "fail" \| "warn" }` (unknown → **400**) |
 | GET | `/api/receipts/:id` | Receipt JSON |
 
 APIs send `Cache-Control: no-store`. App sets CSP-ish security headers.
@@ -62,7 +62,7 @@ APIs send `Cache-Control: no-store`. App sets CSP-ish security headers.
   "repo": "acme/payments-api",
   "build_id": "run-88421",
   "run_id": "88421",
-  "artifact": { "name": "…", "version": "…", "jfrog_uri": null, "checksum": "…" },
+  "artifact": { "name": "…", "version": "…", "uri": "…", "checksum": "…" },
   "gates": [
     { "id": "ghas_codeql", "tool": "codeql", "status": "pass", "summary": "…", "evidence_uri": "…", "required": true }
   ],
@@ -73,7 +73,12 @@ APIs send `Cache-Control: no-store`. App sets CSP-ish security headers.
 ## Fixtures
 
 - `fixtures/receipts/sample-1/` — PASS pack
+- `fixtures/receipts/sample-warn/` — PASS overall with Dependabot **high→warn** (proves warn ≠ fail)
 - `fixtures/receipts/sample-fail/` — FAIL pack
+
+Artifact `uri` in meta may point at an example Artifactory URL; that is metadata only — **not** a JFrog gate in the pilot UI.
+
+**Auth required before any live vendor integrations.** This pilot is fixtures-only until authenticated integrations are wired.
 
 See [docs/RUNBOOK.md](docs/RUNBOOK.md).
 

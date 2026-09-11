@@ -12,10 +12,13 @@ function store(): Map<string, Receipt> {
     // Seed demo receipts
     const pass = buildReceiptFromFixtures("pass");
     const fail = buildReceiptFromFixtures("fail");
+    const warn = buildReceiptFromFixtures("warn");
     globalStore.__rrStore.set(pass.receipt_id, pass);
     globalStore.__rrStore.set(fail.receipt_id, fail);
+    globalStore.__rrStore.set(warn.receipt_id, warn);
     globalStore.__rrStore.set("demo", pass);
     globalStore.__rrStore.set("demo-fail", fail);
+    globalStore.__rrStore.set("demo-warn", warn);
   }
   return globalStore.__rrStore;
 }

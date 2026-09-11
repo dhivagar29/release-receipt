@@ -1,0 +1,8 @@
+{
+  "role": "orchestrator",
+  "workflow": "release.yml",
+  "run_id": "88450",
+  "conclusion": "success",
+  "html_url": "https://github.com/acme/payments-api/actions/runs/88450",
+  "head_sha": "c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ff"
+}

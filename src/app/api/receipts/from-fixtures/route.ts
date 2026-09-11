@@ -1,16 +1,26 @@
 import { NextResponse } from "next/server";
+import { parseScenario } from "@/lib/fixtures";
 import { generateFromFixtures } from "@/lib/store";
-import type { Scenario } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
-  let scenario: Scenario = "pass";
+  let raw: string | undefined;
   try {
     const body = (await req.json()) as { scenario?: string };
-    if (body?.scenario === "fail") scenario = "fail";
+    raw = body?.scenario;
   } catch {
-    // empty body → pass
+    // empty body → default pass via parseScenario(undefined)
+  }
+  const scenario = parseScenario(raw);
+  if (scenario === null) {
+    return NextResponse.json(
+      {
+        error: "unknown scenario",
+        allowed: ["pass", "fail", "warn"],
+      },
+      { status: 400, headers: { "Cache-Control": "no-store" } },
+    );
   }
   const receipt = generateFromFixtures(scenario);
   return NextResponse.json(receipt, {

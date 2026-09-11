@@ -2,11 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import type { Scenario } from "@/lib/types";
 
 export function GenerateButton({
   scenario = "pass",
 }: {
-  scenario?: "pass" | "fail";
+  scenario?: Scenario;
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);

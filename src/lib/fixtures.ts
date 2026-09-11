@@ -12,9 +12,12 @@ import {
 } from "./evaluate";
 import type { Receipt } from "./types";
 
+export const SCENARIOS: readonly Scenario[] = ["pass", "fail", "warn"];
+
 const PACK: Record<Scenario, string> = {
   pass: "sample-1",
   fail: "sample-fail",
+  warn: "sample-warn",
 };
 
 function fixturesRoot() {
@@ -30,11 +33,20 @@ function loadJson<T>(pack: string, file: string): T {
 }
 
 export function listScenarios(): Scenario[] {
-  return ["pass", "fail"];
+  return [...SCENARIOS];
+}
+
+/** Returns scenario if valid; otherwise null (caller should 400 / notFound). */
+export function parseScenario(value: string | undefined | null): Scenario | null {
+  if (value == null || value === "") return "pass";
+  if ((SCENARIOS as readonly string[]).includes(value)) {
+    return value as Scenario;
+  }
+  return null;
 }
 
 export function buildReceiptFromFixtures(scenario: Scenario = "pass"): Receipt {
-  const pack = PACK[scenario] ?? PACK.pass;
+  const pack = PACK[scenario];
   const meta = loadJson<FixtureMeta>(pack, "meta.json");
   const codeql = loadJson(pack, "ghas_codeql.json");
   const secrets = loadJson(pack, "ghas_secrets.json");
@@ -71,5 +83,6 @@ export function buildReceiptFromFixtures(scenario: Scenario = "pass"): Receipt {
     artifact: meta.artifact,
     gates,
     overall,
+    scenario,
   };
 }

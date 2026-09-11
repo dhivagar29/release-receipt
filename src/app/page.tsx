@@ -29,6 +29,12 @@ export default function HomePage() {
             View demo PASS
           </Link>
           <Link
+            href="/demo?scenario=warn"
+            className="rounded-lg bg-panel-2 px-4 py-2 text-sm font-semibold text-snow ring-1 ring-edge hover:bg-edge/50"
+          >
+            View demo WARN
+          </Link>
+          <Link
             href="/demo?scenario=fail"
             className="rounded-lg bg-panel-2 px-4 py-2 text-sm font-semibold text-snow ring-1 ring-edge hover:bg-edge/50"
           >
